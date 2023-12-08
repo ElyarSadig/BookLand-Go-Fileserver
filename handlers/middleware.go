@@ -72,9 +72,9 @@ func trustedDomainMiddleware(next http.Handler) http.Handler {
 		}
 
 		// Allow requests without a specified Origin (local access)
-		// if origin == "" {
-		// 	originAllowed = true
-		// }
+		if origin == "" {
+			originAllowed = true
+		}
 
 		if !originAllowed {
 			log.Printf("Forbidden - Unauthorized Origin: %s", r.Header.Get("Origin"))
