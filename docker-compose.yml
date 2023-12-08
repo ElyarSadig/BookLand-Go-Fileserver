@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 
 services:
   file-server:
@@ -9,7 +9,8 @@ services:
       - "8080:8080"
     networks:
       - my_network
-
+    volumes:
+      - ./uploads:/app/uploads
 
 networks:
   my_network:

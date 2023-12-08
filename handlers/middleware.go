@@ -58,6 +58,7 @@ func trustedDomainMiddleware(next http.Handler) http.Handler {
 
 		// Add the trusted origins
 		allowedOrigins := []string{
+			"http://localhost:3000",
 			"http://localhost:8000",
 			"http://front-end",
 		}
@@ -71,9 +72,9 @@ func trustedDomainMiddleware(next http.Handler) http.Handler {
 		}
 
 		// Allow requests without a specified Origin (local access)
-		if origin == "" {
-			originAllowed = true
-		}
+		// if origin == "" {
+		// 	originAllowed = true
+		// }
 
 		if !originAllowed {
 			log.Printf("Forbidden - Unauthorized Origin: %s", r.Header.Get("Origin"))
