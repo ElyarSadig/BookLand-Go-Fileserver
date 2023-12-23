@@ -51,37 +51,37 @@ func (c *Config) authenticateAndMethodMiddleware(handler http.HandlerFunc) http.
 	})
 }
 
-func trustedDomainMiddleware(next http.Handler) http.Handler {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		origin := r.Header.Get("Origin")
-		originAllowed := false
+// func trustedDomainMiddleware(next http.Handler) http.Handler {
+// 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+// 		origin := r.Header.Get("Origin")
+// 		originAllowed := false
 
-		// Add the trusted origins
-		allowedOrigins := []string{
-			"http://localhost:3000",
-			"http://localhost:8000",
-			"http://front-end",
-		}
+// 		// Add the trusted origins
+// 		allowedOrigins := []string{
+// 			"http://localhost:3000",
+// 			"http://localhost:8000",
+// 			"http://front-end",
+// 		}
 
-		// Check if the request's origin matches any allowed origin
-		for _, allowedOrigin := range allowedOrigins {
-			if origin == allowedOrigin {
-				originAllowed = true
-				break
-			}
-		}
+// 		// Check if the request's origin matches any allowed origin
+// 		for _, allowedOrigin := range allowedOrigins {
+// 			if origin == allowedOrigin {
+// 				originAllowed = true
+// 				break
+// 			}
+// 		}
 
-		// Allow requests without a specified Origin (local access)
-		if origin == "" {
-			originAllowed = true
-		}
+// 		// Allow requests without a specified Origin (local access)
+// 		if origin == "" {
+// 			originAllowed = true
+// 		}
 
-		if !originAllowed {
-			log.Printf("Forbidden - Unauthorized Origin: %s", r.Header.Get("Origin"))
-			http.Error(w, "Forbidden - Unauthorized", http.StatusForbidden)
-			return
-		}
+// 		if !originAllowed {
+// 			log.Printf("Forbidden - Unauthorized Origin: %s", r.Header.Get("Origin"))
+// 			http.Error(w, "Forbidden - Unauthorized", http.StatusForbidden)
+// 			return
+// 		}
 
-		next.ServeHTTP(w, r)
-	})
-}
+// 		next.ServeHTTP(w, r)
+// 	})
+// }

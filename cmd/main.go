@@ -2,9 +2,10 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"net/http"
 
-	"github.com/elyarsadig/file_server/file_operations"
+	fileoperations "github.com/elyarsadig/file_server/file_operations"
 	"github.com/elyarsadig/file_server/handlers"
 )
 
@@ -21,11 +22,10 @@ func main() {
 	// Create directories if they don't exist
 	fileoperations.CreateFilePaths(directories)
 
-	handlers.InitializeFileServers()
-
-	handlers.SetupUploadHandlers()
+	routes := handlers.Routes()
 
 	// Start the server on port 8080
 	fmt.Println("Server is running on :8080")
-	http.ListenAndServe(":8080", nil)
+	log.Fatal(http.ListenAndServe(":8080", routes))
+
 }

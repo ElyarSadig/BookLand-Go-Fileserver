@@ -9,16 +9,6 @@ import (
 	"path/filepath"
 )
 
-func SetupUploadHandlers() {
-	config := NewConfig()
-
-	http.HandleFunc("/upload/identities", config.authenticateAndMethodMiddleware(uploadIdentityHandler))
-	http.HandleFunc("/upload/publications", config.authenticateAndMethodMiddleware(uploadPublicationHandler))
-	http.HandleFunc("/upload/book-covers", config.authenticateAndMethodMiddleware(uploadBookCoverHandler))
-	http.HandleFunc("/upload/books", config.authenticateAndMethodMiddleware(uploadBookHandler))
-
-}
-
 func uploadIdentityHandler(w http.ResponseWriter, r *http.Request) {
 	uploadHandler(w, r, "uploads/identities")
 }
